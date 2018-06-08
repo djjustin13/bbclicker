@@ -1,5 +1,5 @@
 class StartScreen{
-    game: Game
+    private game: Game
 
     constructor(g:Game) {
         this.game = g

@@ -1,8 +1,8 @@
 class Clicker{
-    block:Block
-    element:HTMLElement
-    x:number
-    y:number
+    protected block:Block
+    protected element:HTMLElement
+    private x:number
+    private y:number
 
     constructor(block:Block, name:string){
         this.block = block

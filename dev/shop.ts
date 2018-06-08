@@ -1,6 +1,6 @@
 class Shop{
-    block: Block
-    clickers:any[] = []
+    private block: Block
+    public clickers:any[] = []
 
     constructor(b:Block){
         this.block = b

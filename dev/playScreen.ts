@@ -1,8 +1,8 @@
 class PlayScreen{
-    game:Game
-    block:Block
-    ui:Ui
-    shop:Shop
+    private game:Game
+    private block:Block
+    private ui:Ui
+    private shop:Shop
 
     constructor(g:Game){
         this.game = g

@@ -1,5 +1,5 @@
 class Game {
-    screen:any
+    private screen:any
 
     constructor() {
          this.screen = new StartScreen(this)

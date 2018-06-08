@@ -46,26 +46,6 @@ var Block = (function () {
     };
     return Block;
 }());
-var Clicker = (function () {
-    function Clicker(block, name) {
-        this.block = block;
-        this.element = document.createElement("i");
-        this.element.classList.add("fas", name);
-        document.body.appendChild(this.element);
-        this.x = this.randomNumber(0, window.innerWidth - 250);
-        this.y = this.randomNumber(100, window.innerHeight - 50);
-        this.element.style.left = this.x + "px";
-        this.element.style.top = this.y + "px";
-    }
-    Clicker.prototype.timer = function () {
-        this.block.clickBlock();
-    };
-    Clicker.prototype.randomNumber = function (min, max) {
-        var a = Math.floor(Math.random() * (max - min + 1)) + min;
-        return a;
-    };
-    return Clicker;
-}());
 var Game = (function () {
     function Game() {
         this.screen = new StartScreen(this);
@@ -83,28 +63,6 @@ var Game = (function () {
     return Game;
 }());
 window.addEventListener("load", function () { return new Game(); });
-var Group = (function (_super) {
-    __extends(Group, _super);
-    function Group(b) {
-        var _this = _super.call(this, b, "fa-users") || this;
-        _this.element.style.fontSize = "40px";
-        return _this;
-    }
-    Group.prototype.timer = function () {
-        this.block.clickBlock(10);
-    };
-    return Group;
-}(Clicker));
-var Peercoach = (function (_super) {
-    __extends(Peercoach, _super);
-    function Peercoach(b) {
-        return _super.call(this, b, "fa-user-graduate") || this;
-    }
-    Peercoach.prototype.timer = function () {
-        this.block.clickBlock(6);
-    };
-    return Peercoach;
-}(Clicker));
 var PlayScreen = (function () {
     function PlayScreen(g) {
         var _this = this;
@@ -195,6 +153,65 @@ var StartScreen = (function () {
     };
     return StartScreen;
 }());
+var Ui = (function () {
+    function Ui(b) {
+        this.blockScore = document.createElement("p");
+        this.blockScore.innerHTML = "Building blocks: 0";
+        this.pointScore = document.createElement("p");
+        this.pointScore.innerHTML = "Studiepunten: 0";
+        this.pointScore.style.top = "25px";
+        this.block = b;
+        document.body.appendChild(this.blockScore);
+        document.body.appendChild(this.pointScore);
+    }
+    Ui.prototype.update = function () {
+        this.blockScore.innerHTML = "Building blocks: " + this.block.getScore();
+        this.pointScore.innerHTML = "Studiepunten: " + this.block.getPoints();
+    };
+    return Ui;
+}());
+var Clicker = (function () {
+    function Clicker(block, name) {
+        this.block = block;
+        this.element = document.createElement("i");
+        this.element.classList.add("fas", name);
+        document.body.appendChild(this.element);
+        this.x = this.randomNumber(0, window.innerWidth - 250);
+        this.y = this.randomNumber(100, window.innerHeight - 50);
+        this.element.style.left = this.x + "px";
+        this.element.style.top = this.y + "px";
+    }
+    Clicker.prototype.timer = function () {
+        this.block.clickBlock();
+    };
+    Clicker.prototype.randomNumber = function (min, max) {
+        var a = Math.floor(Math.random() * (max - min + 1)) + min;
+        return a;
+    };
+    return Clicker;
+}());
+var Group = (function (_super) {
+    __extends(Group, _super);
+    function Group(b) {
+        var _this = _super.call(this, b, "fa-users") || this;
+        _this.element.style.fontSize = "40px";
+        return _this;
+    }
+    Group.prototype.timer = function () {
+        this.block.clickBlock(10);
+    };
+    return Group;
+}(Clicker));
+var Peercoach = (function (_super) {
+    __extends(Peercoach, _super);
+    function Peercoach(b) {
+        return _super.call(this, b, "fa-user-graduate") || this;
+    }
+    Peercoach.prototype.timer = function () {
+        this.block.clickBlock(6);
+    };
+    return Peercoach;
+}(Clicker));
 var Student = (function (_super) {
     __extends(Student, _super);
     function Student(b) {
@@ -214,21 +231,4 @@ var Teacher = (function (_super) {
     };
     return Teacher;
 }(Clicker));
-var Ui = (function () {
-    function Ui(b) {
-        this.blockScore = document.createElement("p");
-        this.blockScore.innerHTML = "Building blocks: 0";
-        this.pointScore = document.createElement("p");
-        this.pointScore.innerHTML = "Studiepunten: 0";
-        this.pointScore.style.top = "25px";
-        this.block = b;
-        document.body.appendChild(this.blockScore);
-        document.body.appendChild(this.pointScore);
-    }
-    Ui.prototype.update = function () {
-        this.blockScore.innerHTML = "Building blocks: " + this.block.getScore();
-        this.pointScore.innerHTML = "Studiepunten: " + this.block.getPoints();
-    };
-    return Ui;
-}());
 //# sourceMappingURL=main.js.map

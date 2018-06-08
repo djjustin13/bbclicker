@@ -1,7 +1,7 @@
 class Ui{
-    blockScore:HTMLElement
-    pointScore:HTMLElement
-    block:Block
+    private blockScore:HTMLElement
+    private pointScore:HTMLElement
+    private block:Block
 
     constructor(b:Block){
         this.blockScore = document.createElement("p")

@@ -1,5 +1,5 @@
 class Block{
-element: HTMLElement
+    private element: HTMLElement
 
     private score:number = 0
     private points:number = 0
