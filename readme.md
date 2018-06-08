@@ -5,9 +5,9 @@
 [Speel Buildinblock Clicker v1](http://bbclicker.nl)
 
 ## Checklist
-[x] Startscherm
-[] Einscherm
-[] Er zijn geen bugs
+- [x] Startscherm
+- [ ] Einscherm
+- [ ] Er zijn geen bugs
 
 ## Toelichting OOP
 
