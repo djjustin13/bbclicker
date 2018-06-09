@@ -15,7 +15,7 @@ class Particle{
     }
 
     public update(){
-        this.element.style.transform = `translate(${this.x}px, ${this.y-=2}px)`
+        this.element.style.transform = `translate(${this.x}px, ${this.y-=3}px)`
         if (this.y < -20) this.delete()
     }
 

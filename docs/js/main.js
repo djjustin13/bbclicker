@@ -41,7 +41,9 @@ var Block = (function () {
             this.score -= 100;
             this.points += 1;
         }
-        this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop));
+        if (this.particles.length < 60) {
+            this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop));
+        }
         this.element.style.transform = "scale(1.1)";
         setTimeout(function () { return _this.scaleDown(); }, 100);
     };
@@ -113,7 +115,7 @@ var Particle = (function () {
         document.body.appendChild(this.element);
     }
     Particle.prototype.update = function () {
-        this.element.style.transform = "translate(" + this.x + "px, " + (this.y -= 2) + "px)";
+        this.element.style.transform = "translate(" + this.x + "px, " + (this.y -= 3) + "px)";
         if (this.y < -20)
             this.delete();
     };

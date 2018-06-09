@@ -40,8 +40,11 @@ class Block{
             this.points +=1
         }
 
-        this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop))
+        if(this.particles.length < 60){
+            this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop))
 
+        }
+        
         this.element.style.transform = `scale(1.1)`
         setTimeout(()=> this.scaleDown(), 100)
     }
