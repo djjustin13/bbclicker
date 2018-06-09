@@ -112,7 +112,7 @@ class Teacher extends Clicker{
 ```
 
 ## Klassendiagram
-[diagram](https://preview.ibb.co/ggVyNo/bbc_diagram.jpg)
+![diagram](https://preview.ibb.co/ggVyNo/bbc_diagram.jpg)
 
 ## Peer review
 - To-do
