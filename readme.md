@@ -2,6 +2,10 @@
 
 
 ## Spelen!
+#### How to play?
+Heb jij ook moeite om al die buildingblocks te verzamelen? Moeten er nog aardig wat studiepunten bij komen? Train je skills in Building Block Clicker! Verzamel eerst 100 building blocks om een studiepunt te krijgen. Met je studiepunten kun je in de shop wat hulp kopen.
+
+Hoeveel studiepunten kan jij verzamelen?
 
 ### Live demo
 [Speel Buildinblock Clicker v1 online op bbclicker.nl!](http://bbclicker.nl)
@@ -61,13 +65,58 @@ class ShopItem{
 ```
 
 ### Inheritance
+Bij coderen gaat het om efficentie. Het is zonde om veel regels code te moeten herhalen. Daarom maak ik gebruik van classes die ik extend om de eigenschappen en functies te kunnen hergebruiken.
+
+De logica die de clickbots gebruiken zijn voor een groot deel hetzelfde. Ik maak op het moment van schrijven gebruik van Font Awesome om de iconen van de clickbots te tonen. Bij het aanmaken van een nieuwe clickbots wordt alle standaard logica van het Clicker object gebruikt. Later kunnen de clickbots nog wel aparte eigenschappen krijgen.
+
 ```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
+class Clicker{
+    protected block:Block
+    protected element:HTMLElement
+    private x:number
+    private y:number
+
+    constructor(block:Block, name:string){
+        this.block = block
+
+        this.element = document.createElement("i")
+        this.element.classList.add("fas", name)
+        document.body.appendChild(this.element)
+
+        this.x = this.randomNumber(0, window.innerWidth-250)
+        this.y = this.randomNumber(100, window.innerHeight-50)
+        this.element.style.left = this.x + "px"
+        this.element.style.top = this.y + "px"
+    }
+
+    public timer(){
+        this.block.clickBlock()
+    }
+
+    randomNumber(min:number, max:number) {
+        let a:number = Math.floor(Math.random() * (max - min + 1) ) + min;
+        return a
+    }
+}
+
+class Teacher extends Clicker{ 
+    constructor(b:Block){
+        super(b, "fa-user-tie")
+        this.element.style.fontSize = "40px"
+    } 
+
+    public timer(){
+        this.block.clickBlock(20)
+    }
+}
 ```
 
 ## Klassendiagram
+[diagram](https://preview.ibb.co/ggVyNo/bbc_diagram.jpg)
 
 ## Peer review
+- To-do
 
 ## Extra uitdagingen
+- To-do
+- To-do

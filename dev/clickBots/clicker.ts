@@ -21,7 +21,7 @@ class Clicker{
         this.block.clickBlock()
     }
 
-    randomNumber(min:number, max:number) {
+    private randomNumber(min:number, max:number) {
         let a:number = Math.floor(Math.random() * (max - min + 1) ) + min;
         return a
     }
