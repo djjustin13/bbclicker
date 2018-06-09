@@ -7,7 +7,7 @@ class PlayScreen{
     constructor(g:Game){
         this.game = g
 
-        this.block = new Block()
+        this.block = new Block(this)
         this.ui = new Ui(this, this.block)
         this.shop = new Shop(this.block)
 
@@ -27,6 +27,7 @@ class PlayScreen{
 
     public update():void{
         this.ui.update()
+        this.block.update()
     }
 
     private gameTimer(){

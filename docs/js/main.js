@@ -10,14 +10,29 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Block = (function () {
-    function Block() {
+    function Block(s) {
         var _this = this;
         this.score = 0;
         this.points = 0;
+        this.screen = s;
+        this.particles = [];
         this.element = document.createElement("block");
         document.body.appendChild(this.element);
         this.element.addEventListener("click", function () { return _this.clickBlock(); });
     }
+    Block.prototype.update = function () {
+        for (var _i = 0, _a = this.particles; _i < _a.length; _i++) {
+            var p = _a[_i];
+            p.update();
+        }
+    };
+    Block.prototype.removeElement = function (el) {
+        for (var i = 0; i < this.particles.length; i++) {
+            if (this.particles[i] === el) {
+                this.particles.splice(i, 1);
+            }
+        }
+    };
     Block.prototype.clickBlock = function (n) {
         var _this = this;
         if (n === void 0) { n = 1; }
@@ -26,6 +41,7 @@ var Block = (function () {
             this.score -= 100;
             this.points += 1;
         }
+        this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop));
         this.element.style.transform = "scale(1.1)";
         setTimeout(function () { return _this.scaleDown(); }, 100);
     };
@@ -88,11 +104,34 @@ var Game = (function () {
     return Game;
 }());
 window.addEventListener("load", function () { return new Game(); });
+var Particle = (function () {
+    function Particle(b, x, y) {
+        this.block = b;
+        this.x = this.randomNumber(x - 20, x + 220);
+        this.y = this.randomNumber(y - 20, y + 200);
+        this.element = document.createElement("particle");
+        document.body.appendChild(this.element);
+    }
+    Particle.prototype.update = function () {
+        this.element.style.transform = "translate(" + this.x + "px, " + (this.y -= 2) + "px)";
+        if (this.y < -20)
+            this.delete();
+    };
+    Particle.prototype.randomNumber = function (min, max) {
+        var a = Math.floor(Math.random() * (max - min + 1)) + min;
+        return a;
+    };
+    Particle.prototype.delete = function () {
+        this.element.remove();
+        this.block.removeElement(this);
+    };
+    return Particle;
+}());
 var PlayScreen = (function () {
     function PlayScreen(g) {
         var _this = this;
         this.game = g;
-        this.block = new Block();
+        this.block = new Block(this);
         this.ui = new Ui(this, this.block);
         this.shop = new Shop(this.block);
         setInterval(function () { return _this.gameTimer(); }, 1000);
@@ -108,6 +147,7 @@ var PlayScreen = (function () {
     };
     PlayScreen.prototype.update = function () {
         this.ui.update();
+        this.block.update();
     };
     PlayScreen.prototype.gameTimer = function () {
         if (this.shop.clickers.length > 0) {

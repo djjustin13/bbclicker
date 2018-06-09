@@ -33,6 +33,14 @@ block{
     transition: all 100ms ease-in-out;
 }
 
+particle{
+    background-image: url(../images/block.png);
+    background-size: contain;
+    opacity: 0.2;
+    width: 30px;
+    height: 30px;
+}
+
 logo{
     background-image: url(../images/logo.png);
     background-size: contain;

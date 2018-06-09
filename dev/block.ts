@@ -1,14 +1,36 @@
 class Block{
     private element: HTMLElement
+    private screen: PlayScreen
 
     private score:number = 0
     private points:number = 0
 
-    constructor(){
+    private particles:Particle[]
+
+    constructor(s:PlayScreen){
+        this.screen = s
+        this.particles = []
         this.element = document.createElement("block")
         document.body.appendChild(this.element)
 
         this.element.addEventListener("click", ()=> this.clickBlock())
+    }
+
+    public update(){
+        for(let p of this.particles){
+            p.update()
+        }
+    }
+
+    public removeElement(el:any){
+        for (let i = 0;i< this.particles.length ;i++) {
+
+            if (this.particles[i] === el) {
+    
+                this.particles.splice(i, 1);
+    
+            }
+        }
     }
 
     public clickBlock(n:number = 1){
@@ -17,9 +39,11 @@ class Block{
             this.score -= 100
             this.points +=1
         }
+
+        this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop))
+
         this.element.style.transform = `scale(1.1)`
         setTimeout(()=> this.scaleDown(), 100)
-
     }
 
     private scaleDown(){
@@ -31,7 +55,6 @@ class Block{
             this.points -= n
             return true
         }
-
     }
 
     public getScore(){
