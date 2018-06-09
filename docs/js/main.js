@@ -46,6 +46,27 @@ var Block = (function () {
     };
     return Block;
 }());
+var EndScreen = (function () {
+    function EndScreen(g, points, blocks) {
+        var _this = this;
+        this.game = g;
+        var logo = document.createElement("logo");
+        logo.style.top = "20vh";
+        logo.addEventListener("click", function () { return _this.nextLevel(); });
+        document.body.appendChild(logo);
+        var score = document.createElement("h1");
+        score.style.top = "62vh";
+        score.style.left = "28vw";
+        score.innerHTML = "Je verzamelde " + String(points) + " studiepunten en " + String(blocks) + " building blocks!";
+        document.body.appendChild(score);
+    }
+    EndScreen.prototype.update = function () {
+    };
+    EndScreen.prototype.nextLevel = function () {
+        this.game.showPlayScreen();
+    };
+    return EndScreen;
+}());
 var Game = (function () {
     function Game() {
         this.screen = new StartScreen(this);
@@ -60,6 +81,10 @@ var Game = (function () {
         document.body.innerHTML = "";
         this.screen = new PlayScreen(this);
     };
+    Game.prototype.showEndScreen = function (p, s) {
+        document.body.innerHTML = "";
+        this.screen = new EndScreen(this, p, s);
+    };
     return Game;
 }());
 window.addEventListener("load", function () { return new Game(); });
@@ -68,15 +93,21 @@ var PlayScreen = (function () {
         var _this = this;
         this.game = g;
         this.block = new Block();
-        this.ui = new Ui(this.block);
+        this.ui = new Ui(this, this.block);
         this.shop = new Shop(this.block);
-        this.gameLoop();
         setInterval(function () { return _this.gameTimer(); }, 1000);
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
-    PlayScreen.prototype.gameLoop = function () {
-        var _this = this;
+    PlayScreen.prototype.onKeyDown = function (e) {
+        console.log("knopje");
+        switch (e.keyCode) {
+            case 27:
+                this.exit();
+                break;
+        }
+    };
+    PlayScreen.prototype.update = function () {
         this.ui.update();
-        requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     PlayScreen.prototype.gameTimer = function () {
         if (this.shop.clickers.length > 0) {
@@ -85,6 +116,9 @@ var PlayScreen = (function () {
                 clicker.timer();
             }
         }
+    };
+    PlayScreen.prototype.exit = function () {
+        this.game.showEndScreen(this.block.getPoints(), this.block.getScore());
     };
     return PlayScreen;
 }());
@@ -95,7 +129,7 @@ var Shop = (function () {
         this.block = b;
         var shop = document.createElement("p");
         shop.innerHTML = "Studiepunten shop";
-        shop.style.top = "5px";
+        shop.style.top = "55px";
         shop.style.right = "25px";
         document.body.appendChild(shop);
         new ShopItem("Koop student | 1", 35).getElement().addEventListener("click", function () { return _this.buyStudent(); });
@@ -129,7 +163,7 @@ var ShopItem = (function () {
     function ShopItem(text, topOffset) {
         this.element = document.createElement("p");
         this.element.innerHTML = text;
-        this.element.style.top = String(topOffset) + "px";
+        this.element.style.top = String(50 + topOffset) + "px";
         this.element.classList.add("shop");
         document.body.appendChild(this.element);
     }
@@ -154,15 +188,25 @@ var StartScreen = (function () {
     return StartScreen;
 }());
 var Ui = (function () {
-    function Ui(b) {
+    function Ui(s, b) {
+        var _this = this;
+        this.block = b;
+        this.screen = s;
         this.blockScore = document.createElement("p");
+        this.blockScore.style.left = "25px";
         this.blockScore.innerHTML = "Building blocks: 0";
         this.pointScore = document.createElement("p");
         this.pointScore.innerHTML = "Studiepunten: 0";
         this.pointScore.style.top = "25px";
-        this.block = b;
+        this.pointScore.style.left = "25px";
         document.body.appendChild(this.blockScore);
         document.body.appendChild(this.pointScore);
+        var exit = document.createElement("i");
+        exit.classList.add("fas", "fa-times", "exit");
+        exit.style.top = "10px";
+        exit.style.right = "25px";
+        exit.addEventListener("click", function () { return _this.screen.exit(); });
+        document.body.appendChild(exit);
     }
     Ui.prototype.update = function () {
         this.blockScore.innerHTML = "Building blocks: " + this.block.getScore();

@@ -7,7 +7,7 @@ class Shop{
 
         let shop = document.createElement("p")
         shop.innerHTML = "Studiepunten shop"
-        shop.style.top = "5px"
+        shop.style.top = "55px"
         shop.style.right = "25px"
         document.body.appendChild(shop)
 

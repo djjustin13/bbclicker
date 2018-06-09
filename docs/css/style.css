@@ -2,6 +2,7 @@ body{
     overflow:hidden;
     margin:0px; padding:0px;
     background-color: #000000;
+    color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
     width: 100vw;
     height: 100vh;
@@ -54,6 +55,15 @@ i{
     animation: studentAnimation 2s ease-in-out infinite alternate;
 }
 
+i.exit{
+    animation: none;
+    font-size: 52px;
+    cursor: pointer;
+}
+
+i.exit:hover{
+    color: #ffffff70;
+}
 
 p{
     color: #FFFFFF;

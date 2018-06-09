@@ -1,12 +1,17 @@
 # Building Block Clicker
 
 
-## Live demo
-[Speel Buildinblock Clicker v1](http://bbclicker.nl)
+## Spelen!
+
+### Live demo
+[Speel Buildinblock Clicker v1 online op bbclicker.nl!](http://bbclicker.nl)
+
+### Installatie
+Wil je het project lokaal spelen of de sourcecode bekijken? Clone de repository en run het project via je localhost. Ga naar localhost/.../docs om het spel te spelen.
 
 ## Checklist
 - [x] Startscherm
-- [ ] Einscherm
+- [x] Einscherm
 - [ ] Er zijn geen bugs
 
 ## Toelichting OOP

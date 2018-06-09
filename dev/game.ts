@@ -16,6 +16,11 @@ class Game {
         document.body.innerHTML = ""
         this.screen = new PlayScreen(this)
     }
+
+    public showEndScreen(p:number, s:number){
+        document.body.innerHTML = ""
+        this.screen = new EndScreen(this, p, s)
+    }
     
 } 
 
