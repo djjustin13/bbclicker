@@ -1,14 +1,12 @@
 class Block{
     private element: HTMLElement
-    private screen: PlayScreen
 
     private score:number = 0
     private points:number = 0
 
     private particles:Particle[]
 
-    constructor(s:PlayScreen){
-        this.screen = s
+    constructor(){
         this.particles = []
         this.element = document.createElement("block")
         document.body.appendChild(this.element)

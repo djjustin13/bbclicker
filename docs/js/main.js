@@ -10,11 +10,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Block = (function () {
-    function Block(s) {
+    function Block() {
         var _this = this;
         this.score = 0;
         this.points = 0;
-        this.screen = s;
         this.particles = [];
         this.element = document.createElement("block");
         document.body.appendChild(this.element);
@@ -133,7 +132,7 @@ var PlayScreen = (function () {
     function PlayScreen(g) {
         var _this = this;
         this.game = g;
-        this.block = new Block(this);
+        this.block = new Block();
         this.ui = new Ui(this, this.block);
         this.shop = new Shop(this.block);
         setInterval(function () { return _this.gameTimer(); }, 1000);
@@ -150,6 +149,7 @@ var PlayScreen = (function () {
     PlayScreen.prototype.update = function () {
         this.ui.update();
         this.block.update();
+        this.shop.update();
     };
     PlayScreen.prototype.gameTimer = function () {
         if (this.shop.clickers.length > 0) {
@@ -166,67 +166,59 @@ var PlayScreen = (function () {
 }());
 var Shop = (function () {
     function Shop(b) {
-        var _this = this;
         this.clickers = [];
+        this.items = [];
         this.block = b;
         var shop = document.createElement("p");
         shop.innerHTML = "Studiepunten shop";
         shop.style.top = "55px";
         shop.style.right = "25px";
         document.body.appendChild(shop);
-        new ShopItem("Koop student | 1", 35).getElement().addEventListener("click", function () { return _this.buyStudent(); });
-        new ShopItem("Koop peercoach | 5", 60).getElement().addEventListener("click", function () { return _this.buyPeercoach(); });
-        new ShopItem("Koop klas | 10", 85).getElement().addEventListener("click", function () { return _this.buyGroup(); });
-        new ShopItem("Koop docent | 25", 110).getElement().addEventListener("click", function () { return _this.buyTeacher(); });
-        new ShopItem("Koop school | 100", 135).getElement().addEventListener("click", function () { return _this.buySchool(); });
-        new ShopItem("Koop bedrijf | 300", 160).getElement().addEventListener("click", function () { return _this.buyBuilding(); });
-        new ShopItem("Koop fabriek | 800", 185).getElement().addEventListener("click", function () { return _this.buyFactory(); });
+        this.items.push(new ShopItem(this, this.block, "Student", "Koop student | ", 1, 35));
+        this.items.push(new ShopItem(this, this.block, "Peercoach", "Koop peercoach | ", 5, 60));
+        this.items.push(new ShopItem(this, this.block, "Group", "Koop klas | ", 10, 85));
+        this.items.push(new ShopItem(this, this.block, "Teacher", "Koop docent | ", 25, 110));
+        this.items.push(new ShopItem(this, this.block, "School", "Koop school | ", 100, 135));
+        this.items.push(new ShopItem(this, this.block, "Building", "Koop bedrijf | ", 300, 160));
+        this.items.push(new ShopItem(this, this.block, "Factory", "Koop fabriek | ", 800, 185));
     }
-    Shop.prototype.buyStudent = function () {
-        if (this.block.buy(1)) {
-            this.clickers.push(new Student(this.block));
-        }
-    };
-    Shop.prototype.buyPeercoach = function () {
-        if (this.block.buy(5)) {
-            this.clickers.push(new Peercoach(this.block));
-        }
-    };
-    Shop.prototype.buyGroup = function () {
-        if (this.block.buy(10)) {
-            this.clickers.push(new Group(this.block));
-        }
-    };
-    Shop.prototype.buyTeacher = function () {
-        if (this.block.buy(25)) {
-            this.clickers.push(new Teacher(this.block));
-        }
-    };
-    Shop.prototype.buySchool = function () {
-        if (this.block.buy(100)) {
-            this.clickers.push(new School(this.block));
-        }
-    };
-    Shop.prototype.buyBuilding = function () {
-        if (this.block.buy(300)) {
-            this.clickers.push(new Building(this.block));
-        }
-    };
-    Shop.prototype.buyFactory = function () {
-        if (this.block.buy(800)) {
-            this.clickers.push(new Factory(this.block));
+    Shop.prototype.update = function () {
+        for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
+            var item = _a[_i];
+            item.update();
         }
     };
     return Shop;
 }());
 var ShopItem = (function () {
-    function ShopItem(text, topOffset) {
+    function ShopItem(shop, block, type, text, price, topOffset) {
+        var _this = this;
+        this.shop = shop;
+        this.block = block;
+        this.label = text;
+        this.type = type;
+        this.price = price;
         this.element = document.createElement("p");
-        this.element.innerHTML = text;
         this.element.style.top = String(50 + topOffset) + "px";
         this.element.classList.add("shop");
         document.body.appendChild(this.element);
+        this.element.addEventListener("click", function () { return _this.buy(); });
     }
+    ShopItem.prototype.buy = function () {
+        if (this.block.buy(this.price)) {
+            if (this.price < 10) {
+                this.price++;
+            }
+            else {
+                this.price = Math.round(this.price * 1.5);
+            }
+            var n = new window[this.type](this.block);
+            this.shop.clickers.push(n);
+        }
+    };
+    ShopItem.prototype.update = function () {
+        this.element.innerHTML = this.label + String(this.price);
+    };
     ShopItem.prototype.getElement = function () {
         return this.element;
     };
