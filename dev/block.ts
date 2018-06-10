@@ -17,6 +17,11 @@ class Block{
     }
 
     public update(){
+        if(this.score > 99){
+            this.score -= 100
+            this.points +=1
+        }
+
         for(let p of this.particles){
             p.update()
         }
@@ -35,10 +40,6 @@ class Block{
 
     public clickBlock(n:number = 1){
         this.score += n
-        if(this.score > 99){
-            this.score -= 100
-            this.points +=1
-        }
 
         if(this.particles.length < 60){
             this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop))

@@ -21,6 +21,10 @@ var Block = (function () {
         this.element.addEventListener("click", function () { return _this.clickBlock(); });
     }
     Block.prototype.update = function () {
+        if (this.score > 99) {
+            this.score -= 100;
+            this.points += 1;
+        }
         for (var _i = 0, _a = this.particles; _i < _a.length; _i++) {
             var p = _a[_i];
             p.update();
@@ -37,10 +41,6 @@ var Block = (function () {
         var _this = this;
         if (n === void 0) { n = 1; }
         this.score += n;
-        if (this.score > 99) {
-            this.score -= 100;
-            this.points += 1;
-        }
         if (this.particles.length < 60) {
             this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop));
         }
