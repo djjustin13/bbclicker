@@ -7,6 +7,6 @@ class Building extends Clicker{
     } 
 
     public timer(){
-        this.block.clickBlock(300)
+        this.block.clickBlock(280)
     }
 }

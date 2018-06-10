@@ -179,8 +179,8 @@ var Shop = (function () {
         new ShopItem("Koop klas | 10", 85).getElement().addEventListener("click", function () { return _this.buyGroup(); });
         new ShopItem("Koop docent | 25", 110).getElement().addEventListener("click", function () { return _this.buyTeacher(); });
         new ShopItem("Koop school | 100", 135).getElement().addEventListener("click", function () { return _this.buySchool(); });
-        new ShopItem("Koop bedrijf | 250", 160).getElement().addEventListener("click", function () { return _this.buyBuilding(); });
-        new ShopItem("Koop fabriek | 550", 185).getElement().addEventListener("click", function () { return _this.buyFactory(); });
+        new ShopItem("Koop bedrijf | 300", 160).getElement().addEventListener("click", function () { return _this.buyBuilding(); });
+        new ShopItem("Koop fabriek | 800", 185).getElement().addEventListener("click", function () { return _this.buyFactory(); });
     }
     Shop.prototype.buyStudent = function () {
         if (this.block.buy(1)) {
@@ -208,12 +208,12 @@ var Shop = (function () {
         }
     };
     Shop.prototype.buyBuilding = function () {
-        if (this.block.buy(250)) {
+        if (this.block.buy(300)) {
             this.clickers.push(new Building(this.block));
         }
     };
     Shop.prototype.buyFactory = function () {
-        if (this.block.buy(600)) {
+        if (this.block.buy(800)) {
             this.clickers.push(new Factory(this.block));
         }
     };
@@ -302,7 +302,7 @@ var Building = (function (_super) {
         return _this;
     }
     Building.prototype.timer = function () {
-        this.block.clickBlock(300);
+        this.block.clickBlock(280);
     };
     return Building;
 }(Clicker));
@@ -348,7 +348,7 @@ var School = (function (_super) {
         return _this;
     }
     School.prototype.timer = function () {
-        this.block.clickBlock(100);
+        this.block.clickBlock(85);
     };
     return School;
 }(Clicker));

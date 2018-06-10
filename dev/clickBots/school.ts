@@ -7,6 +7,6 @@ class School extends Clicker{
     } 
 
     public timer(){
-        this.block.clickBlock(100)
+        this.block.clickBlock(85)
     }
 }
