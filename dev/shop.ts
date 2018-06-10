@@ -15,6 +15,10 @@ class Shop{
         new ShopItem("Koop peercoach | 5", 60).getElement().addEventListener("click", ()=> this.buyPeercoach())
         new ShopItem("Koop klas | 10", 85).getElement().addEventListener("click", ()=> this.buyGroup())
         new ShopItem("Koop docent | 25", 110).getElement().addEventListener("click", ()=> this.buyTeacher())
+        new ShopItem("Koop school | 100", 135).getElement().addEventListener("click", ()=> this.buySchool())
+        new ShopItem("Koop bedrijf | 250", 160).getElement().addEventListener("click", ()=> this.buyBuilding())
+        new ShopItem("Koop fabriek | 550", 185).getElement().addEventListener("click", ()=> this.buyFactory())
+
 
     }
 
@@ -39,6 +43,24 @@ class Shop{
     buyTeacher(){
         if(this.block.buy(25)){
             this.clickers.push(new Teacher(this.block))
+        }
+    }
+
+    buySchool(){
+        if(this.block.buy(100)){
+            this.clickers.push(new School(this.block))
+        }
+    }
+
+    buyBuilding(){
+        if(this.block.buy(250)){
+            this.clickers.push(new Building(this.block))
+        }
+    }
+
+    buyFactory(){
+        if(this.block.buy(600)){
+            this.clickers.push(new Factory(this.block))
         }
     }
 }

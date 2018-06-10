@@ -178,6 +178,9 @@ var Shop = (function () {
         new ShopItem("Koop peercoach | 5", 60).getElement().addEventListener("click", function () { return _this.buyPeercoach(); });
         new ShopItem("Koop klas | 10", 85).getElement().addEventListener("click", function () { return _this.buyGroup(); });
         new ShopItem("Koop docent | 25", 110).getElement().addEventListener("click", function () { return _this.buyTeacher(); });
+        new ShopItem("Koop school | 100", 135).getElement().addEventListener("click", function () { return _this.buySchool(); });
+        new ShopItem("Koop bedrijf | 250", 160).getElement().addEventListener("click", function () { return _this.buyBuilding(); });
+        new ShopItem("Koop fabriek | 550", 185).getElement().addEventListener("click", function () { return _this.buyFactory(); });
     }
     Shop.prototype.buyStudent = function () {
         if (this.block.buy(1)) {
@@ -197,6 +200,21 @@ var Shop = (function () {
     Shop.prototype.buyTeacher = function () {
         if (this.block.buy(25)) {
             this.clickers.push(new Teacher(this.block));
+        }
+    };
+    Shop.prototype.buySchool = function () {
+        if (this.block.buy(100)) {
+            this.clickers.push(new School(this.block));
+        }
+    };
+    Shop.prototype.buyBuilding = function () {
+        if (this.block.buy(250)) {
+            this.clickers.push(new Building(this.block));
+        }
+    };
+    Shop.prototype.buyFactory = function () {
+        if (this.block.buy(600)) {
+            this.clickers.push(new Factory(this.block));
         }
     };
     return Shop;
@@ -276,6 +294,30 @@ var Clicker = (function () {
     };
     return Clicker;
 }());
+var Building = (function (_super) {
+    __extends(Building, _super);
+    function Building(b) {
+        var _this = _super.call(this, b, "fa-building") || this;
+        _this.element.style.fontSize = "55px";
+        return _this;
+    }
+    Building.prototype.timer = function () {
+        this.block.clickBlock(300);
+    };
+    return Building;
+}(Clicker));
+var Factory = (function (_super) {
+    __extends(Factory, _super);
+    function Factory(b) {
+        var _this = _super.call(this, b, "fa-industry") || this;
+        _this.element.style.fontSize = "55px";
+        return _this;
+    }
+    Factory.prototype.timer = function () {
+        this.block.clickBlock(700);
+    };
+    return Factory;
+}(Clicker));
 var Group = (function (_super) {
     __extends(Group, _super);
     function Group(b) {
@@ -297,6 +339,18 @@ var Peercoach = (function (_super) {
         this.block.clickBlock(6);
     };
     return Peercoach;
+}(Clicker));
+var School = (function (_super) {
+    __extends(School, _super);
+    function School(b) {
+        var _this = _super.call(this, b, "fa-school") || this;
+        _this.element.style.fontSize = "45px";
+        return _this;
+    }
+    School.prototype.timer = function () {
+        this.block.clickBlock(100);
+    };
+    return School;
 }(Clicker));
 var Student = (function (_super) {
     __extends(Student, _super);
