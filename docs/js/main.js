@@ -20,10 +20,10 @@ var Block = (function () {
         this.element.addEventListener("click", function () { return _this.clickBlock(); });
     }
     Block.prototype.update = function () {
-        if (this.score > 99) {
-            this.score -= 100;
-            this.points += 1;
-        }
+        var quotient = Math.floor(this.score / 100);
+        var remainder = this.score % 100;
+        this.points += quotient;
+        this.score = remainder;
         for (var _i = 0, _a = this.particles; _i < _a.length; _i++) {
             var p = _a[_i];
             p.update();

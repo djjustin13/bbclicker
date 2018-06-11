@@ -15,10 +15,11 @@ class Block{
     }
 
     public update(){
-        if(this.score > 99){
-            this.score -= 100
-            this.points +=1
-        }
+        let quotient = Math.floor(this.score / 100)
+        let remainder = this.score % 100
+
+        this.points += quotient
+        this.score = remainder
 
         for(let p of this.particles){
             p.update()
