@@ -17,7 +17,7 @@ body * {
     display: block;
     box-sizing: border-box;
     background-repeat: no-repeat;
-    z-index: 10;
+    z-index: 1;
 }
 
 block{

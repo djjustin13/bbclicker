@@ -25,7 +25,7 @@ class ShopItem{
             if(this.price < 10){
                 this.price++
             }else{
-                this.price = Math.round(this.price * 1.5)
+                this.price = Math.round(this.price * 1.3)
             }
             let n:any = new window[this.type](this.block)
             this.shop.clickers.push(n)
