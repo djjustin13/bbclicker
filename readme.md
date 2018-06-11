@@ -116,7 +116,7 @@ bijgewerkt op 09-06-18
 ![diagram](https://preview.ibb.co/ggVyNo/bbc_diagram.jpg)
 
 ## Peer review
-- To-do
+[Review op AeroPoint](https://github.com/Kirbman10/AeroPoint/issues/1#issue-331173499)
 
 ## Extra uitdagingen
 - To-do
