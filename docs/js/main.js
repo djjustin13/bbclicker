@@ -110,6 +110,7 @@ var Game = (function () {
         this.screen.gameTimer();
     };
     Game.prototype.showEndScreen = function (p, s) {
+        this.playing = false;
         document.body.innerHTML = "";
         this.screen = new EndScreen(this, p, s);
     };
@@ -123,6 +124,7 @@ var Particle = (function () {
         this.y = this.randomNumber(y - 20, y + 200);
         this.element = document.createElement("particle");
         document.body.appendChild(this.element);
+        this.element.style.transform = "translate(" + this.x + "px, " + (this.y -= 3) + "px)";
     }
     Particle.prototype.update = function () {
         this.element.style.transform = "translate(" + this.x + "px, " + (this.y -= 3) + "px)";

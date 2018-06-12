@@ -30,6 +30,7 @@ class Game {
     }
 
     public showEndScreen(p:number, s:number){
+        this.playing = false
         document.body.innerHTML = ""
         this.screen = new EndScreen(this, p, s)
     }
