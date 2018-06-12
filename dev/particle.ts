@@ -11,7 +11,7 @@ class Particle{
 
         this.element = document.createElement("particle")
         document.body.appendChild(this.element)
-
+        this.element.style.transform = `translate(${this.x}px, ${this.y-=3}px)`
     }
 
     public update(){
