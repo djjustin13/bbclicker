@@ -9,17 +9,16 @@ class Shop{
 
         let shop = document.createElement("p")
         shop.innerHTML = "Studiepunten shop"
-        shop.style.top = "55px"
-        shop.style.right = "25px"
+        shop.classList.add("shopTitle")
         document.body.appendChild(shop)
 
-        this.items.push(new ShopItem(this, this.block, "Student", "Koop student | ", 1, 35))
-        this.items.push(new ShopItem(this, this.block, "Peercoach", "Koop peercoach | ", 5, 60))
-        this.items.push(new ShopItem(this, this.block, "Group", "Koop klas | ", 10, 85))
-        this.items.push(new ShopItem(this, this.block, "Teacher", "Koop docent | ", 25, 110))
-        this.items.push(new ShopItem(this, this.block, "School", "Koop school | ", 100, 135))
-        this.items.push(new ShopItem(this, this.block, "Building", "Koop bedrijf | ", 300, 160))
-        this.items.push(new ShopItem(this, this.block, "Factory", "Koop fabriek | ", 800, 185))
+        this.items.push(new ShopItem(this, this.block, "Student", "user", "Koop student | ", 1, 35))
+        this.items.push(new ShopItem(this, this.block, "Peercoach", "user-graduate", "Koop peercoach | ", 5, 100))
+        this.items.push(new ShopItem(this, this.block, "Group", "users", "Koop klas | ", 10, 165))
+        this.items.push(new ShopItem(this, this.block, "Teacher", "user-tie", "Koop docent | ", 25, 230))
+        this.items.push(new ShopItem(this, this.block, "School", "school", "Koop school | ", 100, 296))
+        this.items.push(new ShopItem(this, this.block, "Building", "building", "Koop bedrijf | ", 300, 360))
+        this.items.push(new ShopItem(this, this.block, "Factory", "industry", "Koop fabriek | ", 800, 425))
 
 
     }

@@ -87,22 +87,27 @@ var EndScreen = (function () {
 var Game = (function () {
     function Game() {
         this.gameTime = 0;
+        this.playing = false;
         this.screen = new StartScreen(this);
         this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.screen.update();
-        this.gameTime++;
-        if (this.gameTime == 60) {
-            this.gameTime = 0;
-            this.screen.gameTimer();
+        if (this.playing == true) {
+            this.gameTime++;
+            if (this.gameTime == 60) {
+                this.gameTime = 0;
+                this.screen.gameTimer();
+            }
         }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     Game.prototype.showPlayScreen = function () {
         document.body.innerHTML = "";
+        this.playing = true;
         this.screen = new PlayScreen(this);
+        this.screen.gameTimer();
     };
     Game.prototype.showEndScreen = function (p, s) {
         document.body.innerHTML = "";
@@ -176,16 +181,15 @@ var Shop = (function () {
         this.block = b;
         var shop = document.createElement("p");
         shop.innerHTML = "Studiepunten shop";
-        shop.style.top = "55px";
-        shop.style.right = "25px";
+        shop.classList.add("shopTitle");
         document.body.appendChild(shop);
-        this.items.push(new ShopItem(this, this.block, "Student", "Koop student | ", 1, 35));
-        this.items.push(new ShopItem(this, this.block, "Peercoach", "Koop peercoach | ", 5, 60));
-        this.items.push(new ShopItem(this, this.block, "Group", "Koop klas | ", 10, 85));
-        this.items.push(new ShopItem(this, this.block, "Teacher", "Koop docent | ", 25, 110));
-        this.items.push(new ShopItem(this, this.block, "School", "Koop school | ", 100, 135));
-        this.items.push(new ShopItem(this, this.block, "Building", "Koop bedrijf | ", 300, 160));
-        this.items.push(new ShopItem(this, this.block, "Factory", "Koop fabriek | ", 800, 185));
+        this.items.push(new ShopItem(this, this.block, "Student", "user", "Koop student | ", 1, 35));
+        this.items.push(new ShopItem(this, this.block, "Peercoach", "user-graduate", "Koop peercoach | ", 5, 100));
+        this.items.push(new ShopItem(this, this.block, "Group", "users", "Koop klas | ", 10, 165));
+        this.items.push(new ShopItem(this, this.block, "Teacher", "user-tie", "Koop docent | ", 25, 230));
+        this.items.push(new ShopItem(this, this.block, "School", "school", "Koop school | ", 100, 296));
+        this.items.push(new ShopItem(this, this.block, "Building", "building", "Koop bedrijf | ", 300, 360));
+        this.items.push(new ShopItem(this, this.block, "Factory", "industry", "Koop fabriek | ", 800, 425));
     }
     Shop.prototype.update = function () {
         for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
@@ -196,11 +200,12 @@ var Shop = (function () {
     return Shop;
 }());
 var ShopItem = (function () {
-    function ShopItem(shop, block, type, text, price, topOffset) {
+    function ShopItem(shop, block, type, icon, text, price, topOffset) {
         var _this = this;
         this.shop = shop;
         this.block = block;
         this.label = text;
+        this.icon = "<i class=\"fas fa-" + icon + "\"></i>";
         this.type = type;
         this.price = price;
         this.element = document.createElement("p");
@@ -222,7 +227,7 @@ var ShopItem = (function () {
         }
     };
     ShopItem.prototype.update = function () {
-        this.element.innerHTML = this.label + String(this.price);
+        this.element.innerHTML = this.icon + " " + this.label + String(this.price);
     };
     ShopItem.prototype.getElement = function () {
         return this.element;

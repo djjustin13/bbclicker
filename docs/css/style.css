@@ -81,15 +81,36 @@ p{
 .shop{
     right: 25px;
     cursor: pointer;
+    padding: 10px 20px 10px 50px;
+    border: 3px solid #FFFFFF;
+    border-radius: 9px;
+    width: 300px;
+}
+
+.shop i{
+    left: 8px;
+    font-size: 26px;
 }
 
 .shop:hover{
-    color: #ffffff70;
+    border: 3px solid #ffffff70;
+    color: #ffffffa1;
+}
+
+.shop:hover i{
+    color: #ffffffa1;
+}
+
+.shopTitle{
+    top: 36px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 @keyframes studentAnimation {
     0% {
-      transform: scale(1);
+        transform: scale(1);
     }
 
     50% {

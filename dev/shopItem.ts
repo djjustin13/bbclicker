@@ -4,12 +4,14 @@ class ShopItem{
     private block:Block
     private type:string
     private label:string
+    private icon:string
     private price: number
 
-    constructor(shop:Shop, block:Block, type:string, text:string, price:number, topOffset:number){
+    constructor(shop:Shop, block:Block, type:string, icon:string, text:string, price:number, topOffset:number){
         this.shop = shop
         this.block = block
         this.label = text
+        this.icon = `<i class="fas fa-${icon}"></i>`
         this.type = type
         this.price = price
         this.element = document.createElement("p")
@@ -33,7 +35,7 @@ class ShopItem{
     }
 
     update(){
-        this.element.innerHTML = this.label + String(this.price)
+        this.element.innerHTML = this.icon + " " + this.label + String(this.price)
     }
 
     getElement():HTMLElement{
