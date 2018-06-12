@@ -11,8 +11,6 @@ class PlayScreen{
         this.ui = new Ui(this, this.block)
         this.shop = new Shop(this.block)
 
-        setInterval(()=> this.gameTimer(), 1000)
-
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
     }
 
@@ -31,7 +29,7 @@ class PlayScreen{
         this.shop.update()
     }
 
-    private gameTimer(){
+    public gameTimer(){
         if(this.shop.clickers.length > 0){
             for(let clicker of this.shop.clickers){
                 clicker.timer()

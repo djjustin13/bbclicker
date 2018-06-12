@@ -86,12 +86,18 @@ var EndScreen = (function () {
 }());
 var Game = (function () {
     function Game() {
+        this.gameTime = 0;
         this.screen = new StartScreen(this);
         this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
         var _this = this;
         this.screen.update();
+        this.gameTime++;
+        if (this.gameTime == 60) {
+            this.gameTime = 0;
+            this.screen.gameTimer();
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     Game.prototype.showPlayScreen = function () {
@@ -135,7 +141,6 @@ var PlayScreen = (function () {
         this.block = new Block();
         this.ui = new Ui(this, this.block);
         this.shop = new Shop(this.block);
-        setInterval(function () { return _this.gameTimer(); }, 1000);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
     PlayScreen.prototype.onKeyDown = function (e) {
@@ -210,7 +215,7 @@ var ShopItem = (function () {
                 this.price++;
             }
             else {
-                this.price = Math.round(this.price * 1.5);
+                this.price = Math.round(this.price * 1.3);
             }
             var n = new window[this.type](this.block);
             this.shop.clickers.push(n);

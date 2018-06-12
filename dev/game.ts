@@ -1,5 +1,6 @@
 class Game {
     private screen:any
+    private gameTime:number = 0
 
     constructor() {
          this.screen = new StartScreen(this)
@@ -8,7 +9,12 @@ class Game {
     
     private gameLoop():void{
         this.screen.update()
+        this.gameTime++
         
+        if(this.gameTime == 60){
+            this.gameTime = 0
+            this.screen.gameTimer()
+        }
         requestAnimationFrame(() => this.gameLoop())
     }
 
