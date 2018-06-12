@@ -1,7 +1,7 @@
 class Shop{
     private block: Block
     
-    public clickers:any[] = []
+    public clickers:Clicker[] = []
     private items:ShopItem[] = []
 
     constructor(b:Block){
@@ -11,6 +11,7 @@ class Shop{
         shop.innerHTML = "Studiepunten shop"
         shop.classList.add("shopTitle")
         document.body.appendChild(shop)
+
 
         this.items.push(new ShopItem(this, this.block, "Student", "user", "Koop student | ", 1, 35))
         this.items.push(new ShopItem(this, this.block, "Peercoach", "user-graduate", "Koop peercoach | ", 5, 100))
