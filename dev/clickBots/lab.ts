@@ -1,12 +1,12 @@
 /// <reference path="clicker.ts"/>
 
-class Factory extends Clicker{ 
+class Laboratory extends Clicker{ 
     constructor(b:Block){
-        super(b, "fa-industry")
+        super(b, "fa-flask")
         this.element.style.fontSize = "55px"
     } 
 
     public timer(){
-        this.block.clickBlock(2000)
+        this.block.clickBlock(6200)
     }
 }

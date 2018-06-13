@@ -189,9 +189,13 @@ var Shop = (function () {
         this.items.push(new ShopItem(this, this.block, "Peercoach", "user-graduate", "Koop peercoach | ", 5, 100));
         this.items.push(new ShopItem(this, this.block, "Group", "users", "Koop klas | ", 10, 165));
         this.items.push(new ShopItem(this, this.block, "Teacher", "user-tie", "Koop docent | ", 25, 230));
-        this.items.push(new ShopItem(this, this.block, "School", "school", "Koop school | ", 100, 296));
+        this.items.push(new ShopItem(this, this.block, "School", "school", "Koop school | ", 100, 295));
         this.items.push(new ShopItem(this, this.block, "Building", "building", "Koop bedrijf | ", 300, 360));
-        this.items.push(new ShopItem(this, this.block, "Factory", "industry", "Koop fabriek | ", 800, 425));
+        this.items.push(new ShopItem(this, this.block, "Farm", "seedling", "Koop farm | ", 800, 425));
+        this.items.push(new ShopItem(this, this.block, "Factory", "industry", "Koop fabriek | ", 2400, 490));
+        this.items.push(new ShopItem(this, this.block, "Laboratory", "flask", "Koop lab | ", 7500, 555));
+        this.items.push(new ShopItem(this, this.block, "Country", "chess-king", "Koop land | ", 22500, 620));
+        this.items.push(new ShopItem(this, this.block, "World", "globe", "Koop wereld | ", 85000, 685));
     }
     Shop.prototype.update = function () {
         for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
@@ -284,7 +288,7 @@ var Clicker = (function () {
         this.element = document.createElement("i");
         this.element.classList.add("fas", name);
         document.body.appendChild(this.element);
-        this.x = this.randomNumber(0, window.innerWidth - 250);
+        this.x = this.randomNumber(0, window.innerWidth - 300);
         this.y = this.randomNumber(100, window.innerHeight - 50);
         this.element.style.left = this.x + "px";
         this.element.style.top = this.y + "px";
@@ -310,6 +314,30 @@ var Building = (function (_super) {
     };
     return Building;
 }(Clicker));
+var Country = (function (_super) {
+    __extends(Country, _super);
+    function Country(b) {
+        var _this = _super.call(this, b, "fa-chess-king") || this;
+        _this.element.style.fontSize = "55px";
+        return _this;
+    }
+    Country.prototype.timer = function () {
+        this.block.clickBlock(20000);
+    };
+    return Country;
+}(Clicker));
+var GalacticEmpire = (function (_super) {
+    __extends(GalacticEmpire, _super);
+    function GalacticEmpire(b) {
+        var _this = _super.call(this, b, "fa-empire") || this;
+        _this.element.style.fontSize = "55px";
+        return _this;
+    }
+    GalacticEmpire.prototype.timer = function () {
+        this.block.clickBlock(10000000);
+    };
+    return GalacticEmpire;
+}(Clicker));
 var Factory = (function (_super) {
     __extends(Factory, _super);
     function Factory(b) {
@@ -318,9 +346,21 @@ var Factory = (function (_super) {
         return _this;
     }
     Factory.prototype.timer = function () {
-        this.block.clickBlock(700);
+        this.block.clickBlock(2000);
     };
     return Factory;
+}(Clicker));
+var Farm = (function (_super) {
+    __extends(Farm, _super);
+    function Farm(b) {
+        var _this = _super.call(this, b, "fa-seedling") || this;
+        _this.element.style.fontSize = "55px";
+        return _this;
+    }
+    Farm.prototype.timer = function () {
+        this.block.clickBlock(700);
+    };
+    return Farm;
 }(Clicker));
 var Group = (function (_super) {
     __extends(Group, _super);
@@ -333,6 +373,18 @@ var Group = (function (_super) {
         this.block.clickBlock(10);
     };
     return Group;
+}(Clicker));
+var Laboratory = (function (_super) {
+    __extends(Laboratory, _super);
+    function Laboratory(b) {
+        var _this = _super.call(this, b, "fa-flask") || this;
+        _this.element.style.fontSize = "55px";
+        return _this;
+    }
+    Laboratory.prototype.timer = function () {
+        this.block.clickBlock(6200);
+    };
+    return Laboratory;
 }(Clicker));
 var Peercoach = (function (_super) {
     __extends(Peercoach, _super);
@@ -374,5 +426,17 @@ var Teacher = (function (_super) {
         this.block.clickBlock(20);
     };
     return Teacher;
+}(Clicker));
+var World = (function (_super) {
+    __extends(World, _super);
+    function World(b) {
+        var _this = _super.call(this, b, "fa-globe") || this;
+        _this.element.style.fontSize = "55px";
+        return _this;
+    }
+    World.prototype.timer = function () {
+        this.block.clickBlock(66000);
+    };
+    return World;
 }(Clicker));
 //# sourceMappingURL=main.js.map

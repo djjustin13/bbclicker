@@ -11,7 +11,7 @@ class Clicker{
         this.element.classList.add("fas", name)
         document.body.appendChild(this.element)
 
-        this.x = this.randomNumber(0, window.innerWidth-250)
+        this.x = this.randomNumber(0, window.innerWidth-300)
         this.y = this.randomNumber(100, window.innerHeight-50)
         this.element.style.left = this.x + "px"
         this.element.style.top = this.y + "px"

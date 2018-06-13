@@ -1,12 +1,12 @@
 /// <reference path="clicker.ts"/>
 
-class Factory extends Clicker{ 
+class Country extends Clicker{ 
     constructor(b:Block){
-        super(b, "fa-industry")
+        super(b, "fa-chess-king")
         this.element.style.fontSize = "55px"
     } 
 
     public timer(){
-        this.block.clickBlock(2000)
+        this.block.clickBlock(20000)
     }
 }
