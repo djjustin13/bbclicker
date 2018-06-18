@@ -6,6 +6,7 @@ class Game {
     constructor() {
          this.screen = new StartScreen(this)
          this.gameLoop()
+         Howler.volume(0.5);
     }
     
     private gameLoop():void{

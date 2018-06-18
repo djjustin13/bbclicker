@@ -14,10 +14,13 @@ var Block = (function () {
         var _this = this;
         this.score = 0;
         this.points = 0;
+        this.sound = new Howl({
+            src: ['sounds/block.mp3']
+        });
         this.particles = [];
         this.element = document.createElement("block");
         document.body.appendChild(this.element);
-        this.element.addEventListener("click", function () { return _this.clickBlock(); });
+        this.element.addEventListener("click", function () { return _this.clickBlock(1, true); });
     }
     Block.prototype.update = function () {
         var quotient = Math.floor(this.score / 100);
@@ -36,9 +39,13 @@ var Block = (function () {
             }
         }
     };
-    Block.prototype.clickBlock = function (n) {
+    Block.prototype.clickBlock = function (n, cursor) {
         var _this = this;
         if (n === void 0) { n = 1; }
+        if (cursor === void 0) { cursor = false; }
+        if (cursor == true) {
+            this.sound.play();
+        }
         this.score += n;
         if (this.particles.length < 60) {
             this.particles.push(new Particle(this, this.element.offsetLeft, this.element.offsetTop));
@@ -90,6 +97,7 @@ var Game = (function () {
         this.playing = false;
         this.screen = new StartScreen(this);
         this.gameLoop();
+        Howler.volume(0.5);
     }
     Game.prototype.gameLoop = function () {
         var _this = this;
@@ -185,6 +193,9 @@ var Shop = (function () {
         shop.innerHTML = "Studiepunten shop";
         shop.classList.add("shopTitle");
         document.body.appendChild(shop);
+        this.sound = new Howl({
+            src: ['sounds/money.mp3']
+        });
         this.items.push(new ShopItem(this, this.block, "Student", "user", "Koop student | ", 1, 35));
         this.items.push(new ShopItem(this, this.block, "Peercoach", "user-graduate", "Koop peercoach | ", 5, 100));
         this.items.push(new ShopItem(this, this.block, "Group", "users", "Koop klas | ", 10, 165));
@@ -222,6 +233,7 @@ var ShopItem = (function () {
     }
     ShopItem.prototype.buy = function () {
         if (this.block.buy(this.price)) {
+            this.shop.sound.play();
             if (this.price < 10) {
                 this.price++;
             }
@@ -258,6 +270,7 @@ var StartScreen = (function () {
 var Ui = (function () {
     function Ui(s, b) {
         var _this = this;
+        this.muted = false;
         this.block = b;
         this.screen = s;
         this.blockScore = document.createElement("p");
@@ -271,14 +284,30 @@ var Ui = (function () {
         document.body.appendChild(this.pointScore);
         var exit = document.createElement("i");
         exit.classList.add("fas", "fa-times", "exit");
-        exit.style.top = "10px";
-        exit.style.right = "25px";
         exit.addEventListener("click", function () { return _this.screen.exit(); });
         document.body.appendChild(exit);
+        this.mute = document.createElement("i");
+        this.mute.classList.add("fas", "fa-volume-up", "mute");
+        this.mute.addEventListener("click", function () { return _this.muteSound(); });
+        document.body.appendChild(this.mute);
     }
     Ui.prototype.update = function () {
         this.blockScore.innerHTML = "Building blocks: " + this.block.getScore();
         this.pointScore.innerHTML = "Studiepunten: " + this.block.getPoints();
+    };
+    Ui.prototype.muteSound = function () {
+        if (this.muted == false) {
+            this.muted = true;
+            this.mute.classList.remove("fa-volume-up");
+            this.mute.classList.add("fa-volume-off");
+            Howler.volume(0.0);
+        }
+        else {
+            this.muted = false;
+            this.mute.classList.add("fa-volume-up");
+            this.mute.classList.remove("fa-volume-off");
+            Howler.volume(0.5);
+        }
     };
     return Ui;
 }());

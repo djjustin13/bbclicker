@@ -1,8 +1,10 @@
 class Ui{
     private blockScore:HTMLElement
     private pointScore:HTMLElement
+    private mute:HTMLElement
     private block:Block
     private screen:PlayScreen
+    private muted: boolean = false
 
     constructor(s:PlayScreen, b:Block){
         this.block = b
@@ -21,14 +23,32 @@ class Ui{
 
         let exit = document.createElement("i")
         exit.classList.add("fas", "fa-times", "exit")
-        exit.style.top = "10px"
-        exit.style.right = "25px"
         exit.addEventListener("click", () => this.screen.exit())
         document.body.appendChild(exit)
+
+        this.mute = document.createElement("i")
+        this.mute.classList.add("fas", "fa-volume-up", "mute")
+        this.mute.addEventListener("click", () => this.muteSound())
+        document.body.appendChild(this.mute)
     }
 
     update(){
         this.blockScore.innerHTML = "Building blocks: "+ this.block.getScore()
         this.pointScore.innerHTML = "Studiepunten: "+ this.block.getPoints()
+    }
+
+    muteSound(){
+        if(this.muted == false){
+            this.muted = true
+            this.mute.classList.remove("fa-volume-up")
+            this.mute.classList.add("fa-volume-off")
+            Howler.volume(0.0)
+        }else{
+            this.muted = false
+            this.mute.classList.add("fa-volume-up")
+            this.mute.classList.remove("fa-volume-off")
+            Howler.volume(0.5)
+        }
+        
     }
 }

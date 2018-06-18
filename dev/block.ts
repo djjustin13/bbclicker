@@ -4,14 +4,19 @@ class Block{
     private score:number = 0
     private points:number = 0
 
+    private sound:any
     private particles:Particle[]
 
     constructor(){
+        this.sound = new Howl({
+            src: ['sounds/block.mp3']
+        })
+
         this.particles = []
         this.element = document.createElement("block")
         document.body.appendChild(this.element)
 
-        this.element.addEventListener("click", ()=> this.clickBlock())
+        this.element.addEventListener("click", ()=> this.clickBlock(1, true))
     }
 
     public update(){
@@ -37,7 +42,11 @@ class Block{
         }
     }
 
-    public clickBlock(n:number = 1){
+    public clickBlock(n:number = 1, cursor:boolean = false){
+        if(cursor == true){
+            this.sound.play();
+        }
+
         this.score += n
 
         if(this.particles.length < 60){

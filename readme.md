@@ -119,5 +119,5 @@ bijgewerkt op 09-06-18
 [Review op AeroPoint](https://github.com/Kirbman10/AeroPoint/issues/1#issue-331173499)
 
 ## Extra uitdagingen
-- To-do
-- To-do
+- De game ziet er zeer verzorgd uit dankzij goed uitgewerkt UI design en artwork
+- Extra library Howler.js voor geluid in de game

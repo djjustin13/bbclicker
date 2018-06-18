@@ -24,6 +24,7 @@ class ShopItem{
 
     private buy(){
         if(this.block.buy(this.price)){
+            this.shop.sound.play()
             if(this.price < 10){
                 this.price++
             }else{

@@ -67,9 +67,21 @@ i.exit{
     animation: none;
     font-size: 52px;
     cursor: pointer;
+    top: 10px;
+    right: 25px;
 }
 
-i.exit:hover{
+i.mute{
+    animation: none;
+    font-size: 44px;
+    cursor: pointer;
+    top: 14px;
+    right: 85px;
+}
+
+
+
+i.exit:hover, i.mute:hover{
     color: #ffffff70;
 }
 

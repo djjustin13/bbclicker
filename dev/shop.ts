@@ -3,6 +3,7 @@ class Shop{
     
     public clickers:Clicker[] = []
     private items:ShopItem[] = []
+    public sound:any
 
     constructor(b:Block){
         this.block = b
@@ -11,6 +12,10 @@ class Shop{
         shop.innerHTML = "Studiepunten shop"
         shop.classList.add("shopTitle")
         document.body.appendChild(shop)
+
+        this.sound = new Howl({
+            src: ['sounds/money.mp3']
+        })
 
 
         this.items.push(new ShopItem(this, this.block, "Student", "user", "Koop student | ", 1, 35))
@@ -26,12 +31,6 @@ class Shop{
         this.items.push(new ShopItem(this, this.block, "World", "globe", "Koop wereld | ", 85000, 685))
         //this.items.push(new ShopItem(this, this.block, "GalacticEmpire", "empire", "Koop intergalactisch rijk | ", 1000000000, 740))
 
-
-
-
-
-
-
     }
 
     update(){
@@ -39,4 +38,5 @@ class Shop{
             item.update()
         }
     }
+
 }

@@ -7,6 +7,7 @@ class StartScreen{
         let logo = document.createElement("logo")
         logo.addEventListener("click",()=> this.nextLevel())
         document.body.appendChild(logo)
+
     }
 
     public update(): void {
