@@ -16,7 +16,7 @@ Wil je het project lokaal spelen of de sourcecode bekijken? Clone de repository 
 ## Checklist
 - [x] Startscherm
 - [x] Einscherm
-- [ ] Er zijn geen bugs
+- [x] Er zijn geen bugs
 
 ## Toelichting OOP
 
@@ -63,6 +63,21 @@ class ShopItem{
     }
 }
 ```
+### Composition
+In mijn game maak ik veel gebruik van composition. Alle componenten in de game zijn classes. In onderstaande klassen diagram is te zien welke objecten welke objecten "hebben". Onderstaand een voorbeeld van de constructor class van mijn level. Hier worden nieuwe instansies aangemaakt van verschillende objecten.
+
+```javascript
+constructor(g:Game){
+        this.game = g
+
+        this.block = new Block()
+        this.ui = new Ui(this, this.block)
+        this.shop = new Shop(this.block)
+
+        window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
+    }
+```
+
 
 ### Inheritance
 Bij coderen gaat het om efficentie. Het is zonde om veel regels code te moeten herhalen. Daarom maak ik gebruik van classes die ik extend om de eigenschappen en functies te kunnen hergebruiken.
