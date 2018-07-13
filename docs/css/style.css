@@ -101,7 +101,11 @@ p{
 
 .shop i{
     left: 8px;
-    font-size: 26px;
+    font-size: 22px;
+}
+
+p.shop{
+    font-size: 18px
 }
 
 .shop:hover{
@@ -114,7 +118,7 @@ p{
 }
 
 .shopTitle{
-    top: 36px;
+    top: 32px;
     right: 25px;
     font-size: 30px;
     font-weight: bold;
