@@ -8,7 +8,7 @@ Heb jij ook moeite om al die buildingblocks te verzamelen? Moeten er nog aardig 
 Hoeveel studiepunten kan jij verzamelen?
 
 ### Live demo
-[Speel Buildinblock Clicker v1 online op bbclicker.nl!](http://bbclicker.nl)
+[Speel Buildinblock Clicker v1 online op bbclicker.nl!](https://djjustin13.github.io/bbclicker/)
 
 ### Installatie
 Wil je het project lokaal spelen of de sourcecode bekijken? Clone de repository en run het project via je localhost. Ga naar localhost/.../docs om het spel te spelen.
